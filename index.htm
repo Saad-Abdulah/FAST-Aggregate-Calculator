@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="image/jpg" href="Images/fast.jpg" class="circle-img">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAST_Aggregate_CALCULATOR</title>
+</head>
+<body>
+    <header>
+        <h4>Welcome to the FAST Test Aggregate Calculator</h4>
+        <div class="buttons">
+            <div class="theme-switcher" id="theme-switcher">
+                <img src="Images/moon.jpg" alt="Switch to Dark Mode" id="theme-icon">
+            </div>
+            <a href="https://www.nu.edu.pk/Home">Home</a>
+            <a href="https://www.nu.edu.pk/Admissions/EligibilityCriteria">Criteria</a>
+            <a href="https://www.youtube.com/watch?v=f3ltOWhDDmU">Calculation</a>
+            <a href="https://www.nu.edu.pk/Admissions/Scholarship">Loans/ScholarShips</a>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Mails &#x25BC;</a> <!-- Down arrow symbol -->
+                <div class="dropdown-content">
+                    <a href="Images/Director and Hod's Mails.jpeg">Director & HOD's</a>
+                    <a href="Images/Academics Mails.jpeg">Academics & FSM</a>
+                </div>
+            </div>
+            <a href="https://www.nu.edu.pk/home/ContactUs">Contact Us</a>
+        </div>
+    </header><br /><br />
+    <div class="calculator" id="calculator">
+        <p class="sgpaheading" style="">Aggregate Calculator</p><hr />
+        <p style="font-family:'Courier New';">Total Marks in Matric/O-levels</p>
+        <input type="number" id="matrictotal" value="1200" min="0" max="1200" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Obtained Marks in Matric/0-levels</p>
+        <input type="number" id="matricobtained" value="1200" min="0" max="1200" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Total Marks in 1stYear/Inter/A-levels</p>
+        <input type="number" id="intertotal" value="1200" min="0" max="1200" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Obtained Marks in Inter/A-levels</p>
+        <input type="number" id="interobtained" value="1200" min="0" max="1200" style="margin-top:-50px; width:43%;">
+        <hr />
+        <p class="heading" style="font-size: 25px; font-family: 'Comic Sans MS', cursive, sans-serif;">Advance + Basic Mathematics + IQ Portion</p>
+        <p style="font-family:'Courier New';">Total Weightage</p>
+        <input type="number" id="rest_total" value="90" min="0" max="90" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Attempted Questions</p>
+        <input type="number" id="rest_attempt" value="90" min="0" max="90" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Correct Questions</p>
+        <input type="number" id="rest_correct" value="90" min="0" max="90" style="margin-top:-50px; width:43%;"><br />
+        <hr />
+        <p class="heading" style="font-size: 25px; font-family: 'Comic Sans MS', cursive, sans-serif;">English Portion</p>
+        <p style="font-family:'Courier New';">Total Weightage</p>
+        <input type="number" id="english_total" value="10" min="0" max="10" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Attempted Questions</p>
+        <input type="number" id="english_attempt" value="30" min="0" max="30" style="margin-top:-50px; width:43%;">
+        <p style="font-family:'Courier New';">Correct Questions</p>
+        <input type="number" id="english_correct" value="20" min="0" max="30" style="margin-top:-50px; width:43%;"><br />
+        <hr />
+        <button id="calculateGPAButton" onclick="calculateaggregate(1)">Calculate Total Aggregate</button>
+        <button id="calculatenegmarkingButton" onclick="calculateaggregate(2)">Calculate Negative Marking</button>
+        <button onclick="clearFields()">Clear</button>
+        <hr />
+        <div id="resultoutnegmark" class="outneg" style="color:#01294E; display:inline-block;">Entry Test Marks (50% Weightage) :</div>
+        <div id="resultoutnegmarkbox" class="outneg-box">0.0</div>
+        <div id="resultwithnegmark" class="withneg" style="color: #01204E; display: inline-block;">Aggregate (with Negative Marking) :</div>
+        <div id="resultwithnegmarkbox" class="withneg-box">0.0</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const themeIcon = document.getElementById('theme-icon');
+            const calculator = document.querySelector('.calculator');
+            const resultOutNegMark = document.getElementById('resultoutnegmark');
+            const resultWithNegMark = document.getElementById('resultwithnegmark');
+            function updateBoxShadow() {
+                if (document.body.classList.contains('dark-mode')) {
+                    calculator.style.boxShadow = '7px 10px 20px rgba(216, 239, 211, 0.9)';
+                } else {
+                    calculator.style.boxShadow = '12px 15px 20px rgba(0, 0, 0, 0.9)';
+                }
+            }
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.src = 'Images/sun.jpg';
+                themeIcon.alt = 'Switch to Light Mode';
+                resultOutNegMark.classList.add('dark-mode');
+                resultWithNegMark.classList.add('dark-mode');
+            } else {
+                themeIcon.src = 'Images/moon.jpg';
+                themeIcon.alt = 'Switch to Dark Mode';
+                resultOutNegMark.classList.remove('dark-mode');
+                resultWithNegMark.classList.remove('dark-mode');
+            }
+            document.body.classList.add('dark-mode');
+            themeIcon.src = 'Images/sun.jpg';
+            updateBoxShadow();
+            themeSwitcher.addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+                resultOutNegMark.classList.toggle('dark-mode');
+                resultWithNegMark.classList.toggle('dark-mode');
+                updateBoxShadow();
+
+                if (document.body.classList.contains('dark-mode')) {
+                    themeIcon.src = 'Images/sun.jpg';
+                    themeIcon.alt = 'Switch to Light Mode';
+                } else {
+                    themeIcon.src = 'Images/moon.jpg';
+                    themeIcon.alt = 'Switch to Dark Mode';
+                }
+            });
+        });
+        function negativemarking() {
+            if (!validateInputs()) {
+                return;
+            }
+            negativemarkingambmiq();
+            negativemarkingenglis();
+        }
+        function negativemarkingambmiq() {
+            const attempted = document.getElementById('rest_attempt').value;
+            const correct = document.getElementById('rest_correct').value;
+            const negativeMarking = (attempted - correct) / 4;
+            document.getElementById('negative-marking-result').innerHTML =
+                'Negative Marking in Rest of English Portions: ' + negativeMarking;
+        }
+        function negativemarkingenglis() {
+            const attempted = document.getElementById('english_attempt').value;
+            const correct = document.getElementById('english_correct').value;
+            const negativeMarking = (attempted - correct) / 8;
+            document.getElementById('negative-marking-result').innerHTML +=
+                '<br>Negative Marking in English Portion: ' + negativeMarking;
+        }
+        function validateInputs() {
+            const matrictotal = parseFloat(document.getElementById('matrictotal').value);
+            const matricobtained = parseFloat(document.getElementById('matricobtained').value);
+            const intertotal = parseFloat(document.getElementById('intertotal').value);
+            const interobtained = parseFloat(document.getElementById('interobtained').value);
+            const restTotal = parseFloat(document.getElementById('rest_total').value);
+            const restAttempted = parseFloat(document.getElementById('rest_attempt').value);
+            const restCorrect = parseFloat(document.getElementById('rest_correct').value);
+            const englishTotal = parseFloat(document.getElementById('english_total').value);
+            const englishAttempted = parseFloat(document.getElementById('english_attempt').value);
+            const englishCorrect = parseFloat(document.getElementById('english_correct').value);
+            if (matricobtained < 0 || matrictotal < 0 || interobtained < 0 || intertotal < 0 || restTotal < 0 || restAttempted < 0 || restCorrect < 0 || englishTotal < 0 || englishAttempted < 0 || englishCorrect < 0) {
+                alert("Pls Prevent Negative Values for Accuracy");
+                return false;
+            }
+            if (matricobtained > matrictotal) {
+                alert("O bhai ap k Matric mn total se b ziada number kesy aa gye...?");
+                return false;
+            }
+            if (interobtained > intertotal) {
+                alert("O bhai ap k Inter mn total se b ziada number kesy aa gye...?");
+                return false;
+            }
+            if (restAttempted > restTotal) {
+                alert("O bhai to ne Mathematics/IQ k Portion mn total se b ziada Attempt kesy kr lye...?");
+                return false;
+            }
+            if (restCorrect > restAttempted) {
+                alert("O bhai ap ne Mathematics/IQ k Portion mn attmepted se ziada correct kesy kr lye...?");
+                return false;
+            }
+            if (englishCorrect > englishAttempted) {
+                alert("O bhai qp ne English k Portion mn mn attmepted se ziada correct kesy kr lye...?");
+                return false;
+            }
+            if (englishAttempted > englishTotal * 3) {
+                alert("O bhai ap ne English k Portion mn total se b ziada Attempt kesy kr lye...?");
+                return false;
+            }
+            return true;
+        }
+        function calculateaggregate(n) {
+            if (!validateInputs()) {
+                return;
+            }
+            const matrictotal = parseFloat(document.getElementById('matrictotal').value);
+            const matricobtained = parseFloat(document.getElementById('matricobtained').value);
+            const intertotal = parseFloat(document.getElementById('intertotal').value);
+            const interobtained = parseFloat(document.getElementById('interobtained').value);
+            const restAttempted = parseFloat(document.getElementById('rest_attempt').value);
+            const restCorrect = parseFloat(document.getElementById('rest_correct').value);
+            const englishAttempted = parseFloat(document.getElementById('english_attempt').value);
+            const englishCorrect = parseFloat(document.getElementById('english_correct').value);
+            const negativeMarkingRest = (restAttempted - restCorrect) / 4;
+            const negativeMarkingEnglish = (englishAttempted - englishCorrect) / 8;
+            const totalNegativeMarking = negativeMarkingRest + negativeMarkingEnglish;
+            const totalcorrectquestions = restCorrect + englishCorrect / 3;
+            const entrytestmarks = totalcorrectquestions - totalNegativeMarking;
+            const aggregateWithNegative = (matricobtained / matrictotal * 10) +
+                (interobtained / intertotal * 40) +
+                (entrytestmarks / 2);
+            if (n == 1) {
+                document.getElementById('resultoutnegmark').style.display = 'inline-block';
+                document.getElementById('resultwithnegmark').style.display = 'inline-block';
+                document.getElementById('resultoutnegmark').innerHTML =
+                    'Entry Test Marks (50% Weightage) :';
+                document.getElementById('resultwithnegmark').innerHTML =
+                    'Aggregate (with Negative Marking) :';
+
+                document.getElementById('resultoutnegmarkbox').innerHTML =
+                    entrytestmarks.toFixed(2);
+                document.getElementById('resultwithnegmarkbox').innerHTML =
+                    aggregateWithNegative.toFixed(2);
+            } else {
+                document.getElementById('resultoutnegmark').style.display = 'inline-block';
+                document.getElementById('resultwithnegmark').style.display = 'inline-block';
+                document.getElementById('resultoutnegmark').innerHTML =
+                    'Neg Marking in Rest of Eng Portions :';
+                document.getElementById('resultwithnegmark').innerHTML =
+                    'Negative Marking in English Portion. :';
+                document.getElementById('resultoutnegmarkbox').innerHTML =
+                    negativeMarkingRest.toFixed(2);
+                document.getElementById('resultwithnegmarkbox').innerHTML =
+                    negativeMarkingEnglish.toFixed(2);
+            }
+        }
+        function clearFields() {
+            const inputs = document.querySelectorAll('input[type="number"]');
+            inputs.forEach(input => {
+                input.value = input.defaultValue;
+            });
+            document.getElementById('resultoutnegmark').innerHTML =  'Entry Test Marks (50% Weightage) :';
+            document.getElementById('resultwithnegmark').innerHTML = 'Aggregate (with Negative Marking) :';
+            document.getElementById('resultoutnegmarkbox').innerHTML = '0.0';
+            document.getElementById('resultwithnegmarkbox').innerHTML = '0.0';
+            document.getElementById('resultoutnegmark').style.display = 'inline-block';
+            document.getElementById('resultwithnegmark').style.display = 'inline-block';
+            document.getElementById('resultoutnegmarkbox').style.display = 'inline-block';
+            document.getElementById('resultwithnegmarkbox').style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>

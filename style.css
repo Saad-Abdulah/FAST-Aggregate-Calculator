@@ -1,0 +1,230 @@
+body {
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+    margin-bottom:40px;
+}
+    body.light-mode {
+        background-color: white;
+        color: black;
+    }
+    body.dark-mode {
+        background-color: #121212;
+        color: white;
+    }
+hr {
+    height: 2px;
+    background-color:black;
+}
+header {
+    margin-bottom:40px;
+    position: fixed;
+    width: 98%;
+    height:70px;
+    font-family: cursive;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: rgba(4, 12, 64, 0.8);
+}
+h4 {
+    text-align:center;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    color: white;
+    padding: 13px 20px;
+    margin: 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+heading {
+    font-size: 25px;
+    text-align: left;
+    font-size: 20px;
+    font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+.sgpaheading {
+    font-size: 35px;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2px;
+    letter-spacing: 0;
+    font-family: "Copperplate", "Papyrus", fantasy;
+    font-family: 'Pacifico', cursive;
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+    .buttons a {
+        color: white;
+        text-decoration: none;
+        padding: 13px 20px;
+        display: inline-block;
+        transition: transform 0.2s ease;
+    }
+        .buttons a:hover {
+            transform: scale(1.2);
+        }
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+    .dropdown .dropbtn {
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 13px 20px;
+        font-size: 16px;
+        transition: transform 0.2s ease;
+    }
+        .dropdown .dropbtn:hover {
+            transform: scale(1.4);
+        }
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.2s ease; /* Smooth transition for hover effect */
+    }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            transform: scale(1.05); /* Increase the size on hover */
+        }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.theme-switcher {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
+}
+    .theme-switcher img {
+        width: 40px;
+        height: 40px;
+        border-radius:50px;
+    }
+body.dark-mode .theme-switcher {
+    background-color: #333;
+    box-shadow: 5px 10px 20px rgba(216, 239, 211, 0.9);
+}
+.calculator {
+    width: 500px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+button {
+    font-family: "Lucida Console", monospace;
+    width: 56%;
+    padding: 10px;
+    margin: 5px 0;
+    margin-left: 7px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2F3645;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left:105px;
+    box-shadow: 2px 2px 8px rgba(256, 256, 256, 0.9);
+}
+button:hover {
+    background-color: #131842;
+}
+.outneg, .withneg {
+    font-family: "Georgia", serif;
+    font-size: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #DDDDDD;
+    color:black;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9); /* Shadow */
+    padding: 10px; /* Padding inside the box */
+    width: auto; /* Adjust width to fit content */
+    text-align: center; /* Center text inside the box */
+    min-width: 100px; /* Minimum width to ensure the box is not too small */
+}
+.outneg-box, .withneg-box {
+    display: inline-block;
+    width: 50px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    margin-left: 10px;
+    margin-bottom: -4px;
+    margin-top: 8px;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #ccc; /* Optional: border style */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.9); /* Shadow */
+    border-radius: 5px; /* Optional: rounded corners */
+    background-color: #00224D; /* Background color */
+    color: white;
+    font-size: 1.4em; /* Smaller font size */
+    line-height: 30px; /* Align text vertically */
+}
+.dark-mode .outneg, .dark-mode .withneg {
+    box-shadow: 2px 0.5px 8px rgba(256, 256, 256, 0.9);
+    background-color: #EEEEEE; /* Background color */ /* Dark mode text color */
+}
+
+.dark-mode .outneg-box, .dark-mode .withneg-box {
+    box-shadow: 4px 4px 8px rgba(256, 256, 256, 0.9); /* Shadow */
+    background-color: #1A2130; /* Dark mode background */
+    color: #eee; /* Dark mode text color */
+    border-color: #444; /* Dark mode border color */
+}
+.headings {
+    font-family: Georgia, serif;
+    font-size:20px;
+}
+.cgpacalculate {
+    font-family: "Lucida Console", monospace;
+    width: 31%;
+    padding: 10px;
+    margin: 5px 0;
+    margin-left: 180px;
+    margin-right: 180px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2F3645;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
